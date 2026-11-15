@@ -63,7 +63,8 @@ button.sm{padding:4px 10px;font-size:13px}
 .xauth{margin:0 0 14px;background:#fbf3e4;color:#2b2416;border:1px solid #ecdcb9;border-left:5px solid #8a6a1f;border-radius:12px;padding:12px 14px;font-size:14px;line-height:1.5}
 .xauth .xal{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#a07a1c;margin-bottom:2px}.xauth b{display:block;font-size:17px;line-height:1.3;margin-bottom:4px}
 .xauth .xat{margin-top:6px}.xauth .xat span{display:inline-block;background:#fff;border:1px solid #ecdcb9;border-radius:14px;padding:1px 10px;font-weight:700;letter-spacing:.03em;user-select:all}
-</style></head><body><div class="app"><aside id="sb"><div class="kk">Hóa học đại cương 1 · CE2103</div><h1>Hóa học đại cương Tương tác</h1><div class="xauth"><div class="xal">Người tạo app</div><b>ThS. Nguyễn Thị Mỹ Phượng</b><div>Khoa Sư phạm</div><div>Trường Đại học Bạc Liêu</div><div class="xat">Điện thoại (Zalo): <span>0888138119</span></div></div>
+.xauth .xav{margin-top:6px;font-size:11.5px;color:#8a7a55}
+</style></head><body><div class="app"><aside id="sb"><div class="kk">Hóa học đại cương 1 · CE2103</div><h1>Hóa học đại cương Tương tác</h1><div class="xauth"><div class="xal">Người tạo app</div><b>ThS. Nguyễn Thị Mỹ Phượng</b><div>Khoa Sư phạm</div><div>Trường Đại học Bạc Liêu</div><div class="xat">Điện thoại (Zalo): <span>0888138119</span></div><div class="xav">Bản cập nhật 15/11/2026 – 20:25</div></div>
 <button class="fn on" data-v="exam"><b>Tạo đề kiểm tra</b><span>Lập đề theo ma trận, trộn mã đề, in ngay</span></button>
 <button class="fn" data-v="qb"><b>Câu hỏi thi</b><span>Từ đề minh họa và mã đề, xếp theo chương, dạng</span></button>
 <button class="fn g" data-v="plan"><b>Soạn kế hoạch bài dạy</b><span>Khung 4 hoạt động, chỉnh sửa, sao chép, in</span></button>
@@ -499,7 +500,7 @@ $("rq").innerHTML="<table><tr><th>Câu</th><th>Nội dung</th><th>Mức</th><th>
 function rv(i){const r=VW[i];$("rvc").hidden=false;$("rvh").textContent="Bài làm của "+r.n+(r.l?" · lớp "+r.l:"")+" · "+fx(sv(r),2)+" điểm";
 $("rv").innerHTML=r.i.map((id,k)=>{const x=QM[id];if(!x)return"";const p=gr(x,r.x[k]);return `<div class="q"><b>Câu ${k+1}.</b> ${x.q}<div class="${p==1?"ok":"no"}">Đã chọn: ${ak(x,r.x[k])} ${p==1?"✓":p>0?"(đúng một phần)":"✗"}</div><div class="w">Đáp án: ${kk(x)}</div></div>`}).join("");$("rvc").scrollIntoView({behavior:"smooth"})}
 async function xl(){const t="sep=;\nHạng;Họ tên;Lớp;Bài;Mã đề;Điểm;Câu đúng;Thời gian làm (giây);Số lần rời trang;Nộp lúc\n"+(window.VW||[]).map((r,i)=>[i+1,r.n,r.l||"",r.c,r.m||"",fx(sv(r),2),r.r,r.e!==undefined?r.e:"",r.w||0,r.t&&r.t.includes("T")?new Date(r.t).toLocaleString("vi-VN"):r.t||""].join(";")).join("\n");
-try{const D=window.claude&&claude.use?await claude.use("downloads"):null;if(D){await D.save({filename:"ket-qua-hoc-sinh.csv",data:"\ufeff"+t});return}}catch(e){if(e&&e.code=="declined")return}
+try{const D=await getDL();if(D){await D.save({filename:"ket-qua-hoc-sinh.csv",data:"\ufeff"+t});return}}catch(e){if(e&&e.code=="declined")return}
 CB(t)}
 function imp(){const L=LS("hdc_imp","[]");$("imp").value.split(/\s+/).filter(Boolean).forEach(s=>{try{L.push(dec(s))}catch(e){}});LW("hdc_imp",L);$("imp").value="";rs()}
 function go(v,a){document.querySelectorAll(".view").forEach(d=>d.classList.toggle("on",d.id=="v-"+v));document.querySelectorAll(".fn").forEach(b=>b.classList.toggle("on",b.dataset.v==v));$("ttl").textContent=TT[v];
@@ -553,7 +554,7 @@ av();
 const PCSS='@page{size:A4;margin:16mm}body{font:12pt/1.45 "Times New Roman",Times,serif;color:#000;margin:0 auto;max-width:190mm;padding:8px}h2,h3{margin:6pt 0}.hd{display:flex;justify-content:space-between;gap:10px;text-align:center;margin-bottom:8pt}.hd div{flex:1}.ln{border-bottom:1px dotted #000;display:inline-block;min-width:60mm}.ph{font-weight:bold;margin:12pt 0 4pt}.q{margin:6pt 0;break-inside:avoid}.o,.t{margin-left:14pt}.nop{background:#e8eefc;padding:8px 12px;margin-bottom:10px;font:14px sans-serif;border-radius:6px}.nop button{margin-left:8px}table{border-collapse:collapse;margin:4pt 0}td,th{border:1px solid #000;padding:3px 7px;text-align:center}.w{font-size:11pt;margin:3pt 0}@media print{.nop{display:none}}';
 function pm(t){let e=$("toast");if(!e){e=document.createElement("div");e.id="toast";e.style.cssText="position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#1a2332;color:#fff;padding:10px 16px;border-radius:10px;max-width:90%;z-index:50;font-size:14px";document.body.appendChild(e)}e.textContent=t;e.hidden=false;clearTimeout(e._t);e._t=setTimeout(()=>{e.hidden=true},7000)}
 async function dlDoc(name,title,body){const html='<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><title>'+title+'</title><style>'+PCSS+'</style></head><body><div class="nop">Nhấn Ctrl+P (hoặc ⌘P) để in hoặc lưu thành PDF. <button onclick="print()">In</button></div>'+body+'<script>setTimeout(function(){try{window.print()}catch(e){}},400)<\/script></body></html>';
-let D=null;try{D=window.claude&&claude.use?await claude.use("downloads"):null}catch(e){}
+let D=null;try{D=await getDL()}catch(e){}
 if(D){try{await D.save({filename:name,data:html});pm("Đã lưu "+name+". Mở file vừa tải, hộp thoại in sẽ tự bật (hoặc nhấn Ctrl+P) để in hoặc lưu thành PDF.");return}catch(e){if(e&&e.code=="declined")return;pm("Không lưu được file ("+((e&&e.code)||"lỗi")+").")}}
 try{window.print();pm("Đã gửi lệnh in. Nếu không thấy hộp thoại in, trình duyệt đang chặn in trong khung này.")}catch(e){pm("Trình duyệt chặn lệnh in trong khung này.")}}
 const grid=(a)=>{let h="";for(let i=0;i<a.length;i+=10){const s=a.slice(i,i+10);h+="<table><tr><th>Câu</th>"+s.map((x,j)=>`<th>${i+j+1}</th>`).join("")+"</tr><tr><th>Đáp án</th>"+s.map(x=>`<td>${x}</td>`).join("")+"</tr></table>"}return h};
@@ -603,14 +604,14 @@ const data=JSON.stringify({A:{g:A.g,t:A.t,m:A.m,od:A.od,d:A.d,k:A.k,p:A.p,z1:A.z
 return $("stu-tpl").textContent.replace("__DATA__",()=>data).replace(/\[\[S\]\]/g,"<script>").replace(/\[\[\/S\]\]/g,"</"+"script>")}
 async function stuFile(i){const L=LS("hdc_asg","[]");if(!L[i]){pm("Không tìm thấy bài giao.");return}let A;try{A=dec(L[i].l)}catch(e){pm("Không đọc được bài giao.");return}
 const html=stuDoc(A),name="bai-kiem-tra-"+String(A.t||"lop").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/đ/g,"d").replace(/[^a-zA-Z0-9]+/g,"-").replace(/^-|-$/g,"").toLowerCase()+".html";
-let D=null;try{D=window.claude&&claude.use?await claude.use("downloads"):null}catch(e){}
+let D=null;try{D=await getDL()}catch(e){}
 if(D){try{await D.save({filename:name,data:html});pm("Đã lưu "+name+". Gửi file này cho học sinh (Zalo, Drive); học sinh mở bằng trình duyệt là làm được, không cần tài khoản.");return}catch(e){if(e&&e.code=="declined")return}}
 CB(html);pm("Không lưu được file trực tiếp; đã sao chép nội dung file. Dán vào Notepad rồi lưu với đuôi .html.")}
 mkA=(o=>async function(){const r=await o.apply(this,arguments);if(TEACHER){const e=$("aout")&&$("aout").querySelector(".res");if(e&&!e.querySelector(".stub"))e.insertAdjacentHTML("beforeend",'<div class="row stub"><button onclick="stuFile(0)">Tải file bài kiểm tra cho học sinh</button><span class="hint">Học sinh mở file bằng trình duyệt, không cần tài khoản.</span></div>')}return r})(mkA);
 
 function vsOf(e){return{c:e.code,i:e.it.map(t=>t.x.id),o:e.it.map(t=>t.x.t=="m"?t.op.map(o=>t.x.o.indexOf(o[0])).join(""):"")}}
 async function stuSave(A){const html=stuDoc(A),name="bai-kiem-tra-"+String(A.t||"lop").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/đ/g,"d").replace(/[^a-zA-Z0-9]+/g,"-").replace(/^-|-$/g,"").toLowerCase()+".html";
-let D=null;try{D=window.claude&&claude.use?await claude.use("downloads"):null}catch(e){}
+let D=null;try{D=await getDL()}catch(e){}
 if(D){try{await D.save({filename:name,data:html});pm("Đã lưu "+name+" ("+(A.vs?A.vs.length:1)+" mã đề). Gửi file hoặc đưa lên Netlify Drop để lấy link cho học sinh.");return}catch(e){if(e&&e.code=="declined")return}}
 CB(html);pm("Không lưu được file trực tiếp; đã sao chép nội dung file. Dán vào Notepad rồi lưu với đuôi .html.")}
 async function exFile(){if(!TEACHER)return lockMsg();if(!EX.length){pm("Hãy tạo đề trước.");return}const v=EX.map(vsOf);
@@ -694,16 +695,18 @@ SH.forEach((s,i)=>{const n=i+1;files.push({name:`xl/worksheets/sheet${n}.xml`,da
 if(s.ch){const c=++nc;files.push({name:`xl/worksheets/_rels/sheet${n}.xml.rels`,data:`${hd}<Relationships xmlns="${PK}"><Relationship Id="rId1" Type="${RT}/drawing" Target="../drawings/drawing${c}.xml"/></Relationships>`},{name:`xl/drawings/drawing${c}.xml`,data:drX(s.an)},{name:`xl/drawings/_rels/drawing${c}.xml.rels`,data:`${hd}<Relationships xmlns="${PK}"><Relationship Id="rId1" Type="${RT}/chart" Target="../charts/chart${c}.xml"/></Relationships>`},{name:`xl/charts/chart${c}.xml`,data:s.ch});ov.push(`<Override PartName="/xl/charts/chart${c}.xml" ContentType="${CT}drawingml.chart+xml"/>`,`<Override PartName="/xl/drawings/drawing${c}.xml" ContentType="${CT}drawing+xml"/>`)}});
 files.unshift({name:"[Content_Types].xml",data:`${hd}<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="${CT}spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="${CT}spreadsheetml.styles+xml"/>${ov.join("")}</Types>`},{name:"_rels/.rels",data:`${hd}<Relationships xmlns="${PK}"><Relationship Id="rId1" Type="${RT}/officeDocument" Target="xl/workbook.xml"/></Relationships>`},{name:"xl/workbook.xml",data:`${hd}<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="${RT}"><sheets>${SH.map((s,i)=>`<sheet name="${xe(s.n)}" sheetId="${i+1}" r:id="rId${i+1}"/>`).join("")}</sheets></workbook>`},{name:"xl/_rels/workbook.xml.rels",data:`${hd}<Relationships xmlns="${PK}">${rl.join("")}<Relationship Id="rId${SH.length+1}" Type="${RT}/styles" Target="styles.xml"/></Relationships>`},{name:"xl/styles.xml",data:stylesXml()});
 const data=zipStore(files),fn="Bang_diem_"+(g?gn:"tat_ca").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/đ/g,"d").replace(/Đ/g,"D").replace(/[^A-Za-z0-9]+/g,"_").replace(/^_|_$/g,"").slice(0,40)+".xlsx";
-let D=null;try{D=window.claude&&claude.use?await claude.use("downloads"):null}catch(e){}
+let D=null;try{D=await getDL()}catch(e){}
 if(D){try{await D.save({filename:fn,data:data});pm("Đã lưu "+fn+" ("+SH.map(s=>s.n).join(", ")+").");return}catch(e){if(e&&e.code=="declined")return}}
 pm("Không lưu được file Excel trực tiếp; dùng nút Xuất CSV.")}
 go("home");</script>
 <script>
 /* ===== Tạo đề kiểm tra: các chức năng bổ sung (theo công cụ tạo đề của Hóa học 10 Tương tác) ===== */
-/* Ngoài Claude (GitHub Pages, mở file trực tiếp trên máy): không có tính năng lưu file của Claude, nên tải file bằng chính trình duyệt */
-(function(){let top=false;try{top=window.top===window.self}catch(e){}if(!top||(window.claude&&window.claude.use))return;
- const MT={xlsx:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",docx:"application/vnd.openxmlformats-officedocument.wordprocessingml.document",csv:"text/csv;charset=utf-8",html:"text/html;charset=utf-8"};
- window.claude={use:async n=>n=="downloads"?{save:async o=>{const ext=String(o.filename).split(".").pop().toLowerCase(),u=URL.createObjectURL(new Blob([o.data],{type:MT[ext]||"application/octet-stream"})),a=document.createElement("a");a.href=u;a.download=o.filename;a.style.display="none";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),15000)}}:null}})();
+/* Lưu file: trong Claude dùng tính năng tải file của Claude; ngoài Claude (GitHub Pages, mở file trên máy) tải bằng chính trình duyệt */
+function browserSave(o){const MT={xlsx:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",docx:"application/vnd.openxmlformats-officedocument.wordprocessingml.document",csv:"text/csv;charset=utf-8",html:"text/html;charset=utf-8"},ext=String(o.filename).split(".").pop().toLowerCase(),u=URL.createObjectURL(new Blob([o.data],{type:MT[ext]||"application/octet-stream"})),a=document.createElement("a");a.href=u;a.download=o.filename;a.style.display="none";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),15000)}
+async function getDL(){let top=true;try{top=window.top===window.self}catch(e){top=false}
+ if(top)return{save:async o=>browserSave(o)};
+ let D=null;try{if(window.claude&&claude.use)D=await Promise.race([claude.use("downloads"),new Promise(r=>setTimeout(()=>r(null),12000))])}catch(e){}
+ return D||{save:async o=>browserSave(o)}}
 const X3=(function(){
 const XK="hdc_exam_v1",EDK="hdc_edq",PT=["m","tf","s"],PNM={m:"I",tf:"II",s:"III"},ABCD="ABCD",abcd="abcd";
 const GN={goc:"Từ file nguồn",td:"Dạng tương tự",cb:"Cơ bản"};
@@ -880,7 +883,7 @@ function docx(S,title){const hd='<?xml version="1.0" encoding="UTF-8" standalone
   {name:"word/document.xml",data:hd+`<w:document ${NS}><w:body>${body}</w:body></w:document>`}])}
 const slug=s=>String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d").replace(/Đ/g,"D").replace(/[^A-Za-z0-9]+/g,"_").replace(/^_|_$/g,"").slice(0,50);
 const fname=ext=>"De_"+(slug(val("e2"))||"kiem_tra")+"_"+(slug(val("e3"))||"mon")+"."+ext;
-async function saveBin(name,data,type){let D=null;try{D=window.claude&&claude.use?await claude.use("downloads"):null}catch(e){}
+async function saveBin(name,data,type){let D=null;try{D=await getDL()}catch(e){}
  if(D){try{await D.save({filename:name,data});pm("Đã lưu "+name+".");return true}catch(e){if(e&&e.code=="declined")return false}}
  try{const u=URL.createObjectURL(new Blob([data],{type})),a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);pm("Đã tạo "+name+". Nếu trình duyệt không tải về, hãy dùng “Tải bản in (.html)”.");return true}catch(e){pm("Không lưu được file "+name+".");return false}}
 function doDocx(){if(!EX.length)return;flush();try{saveBin(fname("docx"),docx(secs(EX),val("e2")),"application/vnd.openxmlformats-officedocument.wordprocessingml.document")}catch(e){pm("Chưa tạo được file Word. Hãy dùng “Tải bản in (.html)”.")}}
