@@ -64,7 +64,7 @@ button.sm{padding:4px 10px;font-size:13px}
 .xauth .xal{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#a07a1c;margin-bottom:2px}.xauth b{display:block;font-size:17px;line-height:1.3;margin-bottom:4px}
 .xauth .xat{margin-top:6px}.xauth .xat span{display:inline-block;background:#fff;border:1px solid #ecdcb9;border-radius:14px;padding:1px 10px;font-weight:700;letter-spacing:.03em;user-select:all}
 .xauth .xav{margin-top:6px;font-size:11.5px;color:#8a7a55}
-</style></head><body><div class="app"><aside id="sb"><div class="kk">Hóa học đại cương 1 · CE2103</div><h1>Hóa học đại cương Tương tác</h1><div class="xauth"><div class="xal">Người tạo app</div><b>ThS. Nguyễn Thị Mỹ Phượng</b><div>Khoa Sư phạm</div><div>Trường Đại học Bạc Liêu</div><div class="xat">Điện thoại (Zalo): <span>0888138119</span></div><div class="xav">Bản cập nhật 15/11/2026 – 20:25</div></div>
+</style></head><body><div class="app"><aside id="sb"><div class="kk">Hóa học đại cương 1 · CE2103</div><h1>Hóa học đại cương Tương tác</h1><div class="xauth"><div class="xal">Người tạo app</div><b>ThS. Nguyễn Thị Mỹ Phượng</b><div>Khoa Sư phạm</div><div>Trường Đại học Bạc Liêu</div><div class="xat">Điện thoại (Zalo): <span>0888138119</span></div><div class="xav">Bản cập nhật 15/11/2026 – 21:05</div></div>
 <button class="fn on" data-v="exam"><b>Tạo đề kiểm tra</b><span>Lập đề theo ma trận, trộn mã đề, in ngay</span></button>
 <button class="fn" data-v="qb"><b>Câu hỏi thi</b><span>Từ đề minh họa và mã đề, xếp theo chương, dạng</span></button>
 <button class="fn g" data-v="plan"><b>Soạn kế hoạch bài dạy</b><span>Khung 4 hoạt động, chỉnh sửa, sao chép, in</span></button>
@@ -474,7 +474,7 @@ function kk(x){return x.t=="m"?x.o[0]:x.t=="tf"?x.s2.map((o,j)=>"abcd"[j]+"-"+(o
 function sbm(){if(!CUR||CUR.done)return;CUR.done=1;clearInterval(TI);let sc=0;const A=CUR.a,showK=!A||A.k!==0,showP=!A||A.p!==0,xs=[];
 CUR.e.it.forEach((it,k)=>{const a=ansOf(it,k);xs.push(a);const p=gr(it.x,a);sc+=p;$("w_t_"+k).innerHTML=showK?`<span class="${p==1?"ok":"no"}">${p==1?"Đúng":p>0?"Đúng một phần":"Chưa đúng"}</span> · Đáp án: ${key(it)}. ${it.x.w}`:""});
 const n=CUR.e.it.length,d=Math.round(sc/n*1000)/100;$("tm").textContent=showP?"Điểm "+fx(d,1):"Đã nộp";
-const rec={g:A?A.g:"th",c:CUR.e.h[1],m:CUR.e.vcode||"",n:CUR.name,l:CUR.cls,s:d,r:fx(sc,2)+"/"+n,e:Math.round((Date.now()-CUR.t0)/1000),w:CUR.w,t:new Date().toISOString(),i:CUR.e.it.map(t=>t.x.id),x:xs};
+const rec={g:A?A.g:"th",c:CUR.e.h[1],m:CUR.e.vcode||"",n:CUR.name,l:CUR.cls,s:d,r:fx(sc,2)+"/"+n,e:Math.round((Date.now()-CUR.t0)/1000),w:CUR.w,t:new Date().toISOString(),i:CUR.e.it.map(t=>t.x.id),x:xs,o:CUR.e.it.map(t=>t.op?t.op.map(o=>t.x.o.indexOf(o[0])).join(""):"")};
 const r=LS("hdc_res","[]");r.push(rec);LW("hdc_res",r);
 if(DB&&UID&&A&&A.c){const nd={};nd["a_"+A.g+"_"+Date.now()]=rec;DB.doc("sub/"+UID).update(nd).catch(()=>DB.doc("sub/"+UID).set(nd)).catch(()=>{})}
 $("rc").innerHTML=`<div class="card"><b>Đã nộp bài.${showP?` Điểm: ${fx(d,1)}/10 (${rec.r} câu đúng).`:" Giáo viên sẽ thông báo điểm."}</b>${CUR.w?`<div class="bad">Số lần rời trang: ${CUR.w}</div>`:""}<div class="hint">Nếu giáo viên yêu cầu, gửi mã kết quả này:</div><textarea readonly rows="2" style="width:100%;box-sizing:border-box">${enc(rec)}</textarea></div>`;document.querySelector(".main").scrollTop=0}
@@ -654,9 +654,12 @@ const drX=a=>`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><xdr:wsDr x
 async function xlsx(){const rows=window.VW||[];if(!rows.length){pm("Chưa có kết quả để xuất.");return}
 const g=$("rg").value,gn=g?$("rg").selectedOptions[0].textContent:"Tất cả bài",cls=$("rl").value,now=new Date(),p2=n=>String(n).padStart(2,"0"),nowS=`${p2(now.getHours())}:${p2(now.getMinutes())} ${p2(now.getDate())}/${p2(now.getMonth()+1)}/${now.getFullYear()}`;
 const ser=r=>{if(!(r.t&&String(r.t).includes("T")))return null;const d=new Date(r.t);return Date.UTC(d.getFullYear(),d.getMonth(),d.getDate(),d.getHours(),d.getMinutes(),d.getSeconds())/864e5+25569};
-let A=null;try{const e0=g?LS("hdc_asg","[]").find(x=>x.g==g):null;if(e0)A=dec(e0.l)}catch(e){}
-const TO={m:0,tf:1,s:2},QL=[],ORD={},seen=new Set(),aq=(id,o)=>{if(!QM[id]||seen.has(id))return;seen.add(id);QL.push(id);if(o)ORD[id]=o};
-if(A&&A.vs)A.vs.forEach(v=>v.i.forEach((id,k)=>aq(id,v.o[k])));rows.forEach(r=>(r.i||[]).forEach(id=>aq(id)));QL.sort((a,b)=>TO[QM[a].t]-TO[QM[b].t]);
+const AS=[];try{LS("hdc_asg","[]").forEach(e=>{try{const a=dec(e.l);if(a&&(!g||a.g==g))AS.push(a)}catch(e){}})}catch(e){}
+if(DB){try{const sn=await Promise.race([DB.collection("asg").get(),new Promise((_,r)=>setTimeout(r,8000))]);sn.docs.forEach(d=>{const a=d.data();if(a&&a.vs&&(!g||a.g==g)&&!AS.some(b=>b.g==a.g))AS.push(a)})}catch(e){}}
+AS.forEach(a=>{if(a.ov)Object.keys(a.ov).forEach(k=>{if(!QM[k])QM[k]=a.ov[k]})});
+const hp=(id,n)=>{let h=2166136261;for(const c of String(id))h=Math.imul(h^c.charCodeAt(0),16777619)>>>0;const a=[...Array(n).keys()];for(let i=n-1;i>0;i--){h=Math.imul(h^(h>>>15),2246822519)>>>0;h=Math.imul(h^(h>>>13),3266489917)>>>0;const j=h%(i+1);[a[i],a[j]]=[a[j],a[i]]}return a.join("")};
+const TO={m:0,tf:1,s:2},QL=[],ORD={},seen=new Set(),aq=(id,o)=>{if(!QM[id])return;if(o&&!ORD[id])ORD[id]=o;if(seen.has(id))return;seen.add(id);QL.push(id)};
+AS.forEach(a=>(a.vs||[]).forEach(v=>v.i.forEach((id,k)=>aq(id,v.o[k]))));rows.forEach(r=>(r.i||[]).forEach((id,k)=>aq(id,r.o&&r.o[k])));QL.forEach(id=>{const x=QM[id];if(x.t=="m"){const o=String(ORD[id]||"");if(o.length!=x.o.length||!/^\d+$/.test(o))ORD[id]=hp(id,x.o.length)}});QL.sort((a,b)=>TO[QM[a].t]-TO[QM[b].t]);
 const PF=["I","II","III"],lab={},cc=[0,0,0];QL.forEach(id=>{const t=TO[QM[id].t];lab[id]=PF[t]+"."+(++cc[t])});
 const lt=(id,j)=>"ABCD"[(ORD[id]||"0123").indexOf(String(j))]||"",blank=(x,a)=>x.t=="m"?(a==null||a==="-"||a===""):x.t=="tf"?/^-*$/.test(a||""):!String(a||"").trim(),
 amap=r=>{const m={};(r.i||[]).forEach((id,k)=>{if(QM[id]&&r.x)m[id]=r.x[k]});return m},
@@ -671,7 +674,7 @@ rows.forEach((r,i)=>{const z=i%2,d=sc[i],t=ser(r);R1.push({c:[{v:i+1,s:4+z},{v:r
 const rF="F5:F"+(4+k);R1.push({c:[]},{h:22,c:[null,{v:"TỔNG KẾT",s:1},{v:"",s:1}]},{c:[null,{v:"Điểm trung bình",s:17},{v:Math.round(sc.reduce((a,b)=>a+b,0)/k*100)/100,s:18,f:`ROUND(AVERAGE(${rF}),2)`}]},{c:[null,{v:"Điểm cao nhất",s:17},{v:Math.max(...sc),s:18,f:`MAX(${rF})`}]},{c:[null,{v:"Điểm thấp nhất",s:17},{v:Math.min(...sc),s:18,f:`MIN(${rF})`}]},{c:[null,{v:"Số bài nộp",s:17},{v:k,s:20,f:`COUNT(${rF})`}]});
 R1.forEach(r=>r.c.forEach(c=>{if(c&&c.s)c.s+=K0}));
 const SH=[{n:"Bảng điểm",x:sheetXml(R1,[8,26,10,28,9,9,13,14,16,14,19],{fz:4,af:"A4:K"+(4+k),mg:["A1:K1","A2:K2"],tab:"FF0F766E",ng:1,rh:18,hf:1})}];
-if(QL.length){const lc=cln(3+QL.length),R2=[{h:24,c:[{v:"CHI TIẾT ĐÁP ÁN TỪNG CÂU – "+gn,s:1}]},{c:[{v:"Chữ cái theo thứ tự phương án của đề gốc (đề giáo viên xem trước). Xanh: đúng · Đỏ: sai · Vàng: Phần II đúng một phần · Trống: bỏ qua.",s:2}]},{c:[]},{c:["STT","Họ và tên","Lớp",...QL.map(id=>lab[id]),"Điểm"].map(t=>({v:t,s:3}))},{c:[{v:"",s:7},{v:"ĐÁP ÁN",s:7},{v:"",s:7},...QL.map(id=>({v:key(id),s:7})),{v:"",s:7}]}];
+if(QL.length){const lc=cln(3+QL.length),R2=[{h:24,c:[{v:"CHI TIẾT ĐÁP ÁN TỪNG CÂU – "+gn,s:1}]},{c:[{v:"Chữ cái A, B, C, D theo thứ tự phương án của đề đã giao. Xanh: đúng · Đỏ: sai · Vàng: Phần II đúng một phần · Trống: bỏ qua.",s:2}]},{c:[]},{c:["STT","Họ và tên","Lớp",...QL.map(id=>lab[id]),"Điểm"].map(t=>({v:t,s:3}))},{c:[{v:"",s:7},{v:"ĐÁP ÁN",s:7},{v:"",s:7},...QL.map(id=>({v:key(id),s:7})),{v:"",s:7}]}];
 rows.forEach((r,i)=>{const m=amap(r);R2.push({c:[{v:i+1,s:5},{v:r.n||"",s:4},{v:r.l||"",s:5},...QL.map(id=>{if(!(id in m))return{v:"",s:5};const x=QM[id],a=m[id];if(blank(x,a))return{v:"",s:5};const p=gr(x,a);if(x.t=="m")return{v:lt(id,+a),s:p==1?10:11};if(x.t=="tf")return{v:a.split("").map(c=>c=="1"?"Đ":c=="0"?"S":"").join(""),s:p==1?10:p>0?9:11};return{v:String(a),s:p==1?10:11}}),{v:sc[i],s:6}]})});
 SH.push({n:"Chi tiết từng câu",x:sheetXml(R2,[6,26,8,...QL.map(id=>QM[id].t=="m"?5:QM[id].t=="tf"?8:9),8],{fx:3,fz:5,mg:["A1:"+lc+"1","A2:"+lc+"2"]})});
 if(rows.some(r=>r.i&&r.x)){const R5=[{h:24,c:[{v:"BÀI LÀM CỦA HỌC SINH – "+gn,s:1}]},{c:[{v:"Mỗi học sinh một khối (in ra mỗi học sinh một trang). Thứ tự câu theo đề học sinh đã làm. Xanh: đúng · Đỏ: sai · Vàng: đúng một phần · Bỏ trống: không trả lời.",s:2}]},{c:[]}],mg5=["A1:F1","A2:F2"],br=[],E6=(t,w)=>String(t).split("\n").reduce((a,l)=>a+Math.max(1,Math.ceil(l.length/w)),0);
