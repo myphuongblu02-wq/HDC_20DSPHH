@@ -437,7 +437,7 @@ if(v=="qb"){$("ch").value=0;build()}if(v=="take")mdl();if(v=="res")rs();if(v=="e
 av();
 
 const CB=t=>{try{navigator.clipboard.writeText(t).catch(()=>{})}catch(e){}};
-const LINK="https://claude.ai/artifact/2L1pokvXxyN5yD9nDVbvLE";
+const LINK=(()=>{try{if(window.top===window.self&&/^https?:$/.test(location.protocol))return location.origin+location.pathname}catch(e){}return "https://claude.ai/artifact/2L1pokvXxyN5yD9nDVbvLE"})();
 const gid=()=>Array.from({length:8},()=>CH6[Math.floor(Math.random()*CH6.length)]).join("");
 const stt=A=>{const n=Date.now();return A.od&&n<new Date(A.od).getTime()?"Chưa mở":A.d&&n>new Date(A.d).getTime()?"Đã đóng":"Đang mở"};
 const dt=s=>s?new Date(s).toLocaleString("vi-VN"):"không giới hạn";
@@ -700,6 +700,10 @@ pm("Không lưu được file Excel trực tiếp; dùng nút Xuất CSV.")}
 go("home");</script>
 <script>
 /* ===== Tạo đề kiểm tra: các chức năng bổ sung (theo công cụ tạo đề của Hóa học 10 Tương tác) ===== */
+/* Ngoài Claude (GitHub Pages, mở file trực tiếp trên máy): không có tính năng lưu file của Claude, nên tải file bằng chính trình duyệt */
+(function(){let top=false;try{top=window.top===window.self}catch(e){}if(!top||(window.claude&&window.claude.use))return;
+ const MT={xlsx:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",docx:"application/vnd.openxmlformats-officedocument.wordprocessingml.document",csv:"text/csv;charset=utf-8",html:"text/html;charset=utf-8"};
+ window.claude={use:async n=>n=="downloads"?{save:async o=>{const ext=String(o.filename).split(".").pop().toLowerCase(),u=URL.createObjectURL(new Blob([o.data],{type:MT[ext]||"application/octet-stream"})),a=document.createElement("a");a.href=u;a.download=o.filename;a.style.display="none";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),15000)}}:null}})();
 const X3=(function(){
 const XK="hdc_exam_v1",EDK="hdc_edq",PT=["m","tf","s"],PNM={m:"I",tf:"II",s:"III"},ABCD="ABCD",abcd="abcd";
 const GN={goc:"Từ file nguồn",td:"Dạng tương tự",cb:"Cơ bản"};
